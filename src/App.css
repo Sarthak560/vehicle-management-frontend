@@ -1,0 +1,157 @@
+/* ==== GLOBAL THEME ==== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #0b0b0b 0%, #121212 100%);
+  color: #f5f7fa;
+  overflow-x: hidden;
+}
+
+/* ==== DASHBOARD ==== */
+.dashboard-container {
+  padding: 2rem;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.dashboard-container h2 {
+  color: #00eaff; /* Cyan metallic glow */
+  font-size: 2.2rem;
+  margin-bottom: 1.8rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(0, 234, 255, 0.6);
+  font-weight: 700;
+}
+
+/* ==== FORM ==== */
+form {
+  background: rgba(20, 20, 20, 0.9);
+  padding: 1.8rem;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 234, 255, 0.2);
+  box-shadow: 0 0 25px rgba(0, 234, 255, 0.15);
+  max-width: 420px;
+  margin: 0 auto 2.5rem;
+  backdrop-filter: blur(10px);
+}
+
+input,
+button {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* ==== INPUT FIELDS ==== */
+input {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #00eaff;
+  box-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+}
+
+/* ==== BUTTONS ==== */
+button {
+  background: linear-gradient(90deg, #00eaff, #00c6ff);
+  color: #0d0d0d;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(0, 234, 255, 0.2);
+}
+
+button:hover {
+  background: linear-gradient(90deg, #00b7ff, #00f5ff);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+}
+
+/* ==== CAR LIST ==== */
+.car-card {
+  background: linear-gradient(145deg, #171717, #1d1d1d);
+  border: 1px solid rgba(0, 234, 255, 0.15);
+  border-radius: 14px;
+  padding: 18px;
+  width: 350px;
+  margin: 15px auto;
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.car-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(0, 234, 255, 0.4);
+}
+
+.car-card h3 {
+  color: #00eaff;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 8px rgba(0, 234, 255, 0.5);
+}
+
+.car-card p {
+  color: #cccccc;
+  font-size: 0.95rem;
+}
+
+/* ==== CARD ACTION BUTTONS ==== */
+.card-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+.card-actions button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: none;
+  transition: 0.3s;
+}
+
+.card-actions button:first-child {
+  background: linear-gradient(90deg, #00b7ff, #00f5ff);
+  color: #0d0d0d;
+}
+
+.card-actions button:first-child:hover {
+  background: linear-gradient(90deg, #00a3e0, #00dbf5);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+}
+
+.card-actions button:last-child {
+  background: linear-gradient(90deg, #ff003c, #b3002d);
+  color: white;
+}
+
+.card-actions button:last-child:hover {
+  background: linear-gradient(90deg, #b3002d, #ff0044);
+  box-shadow: 0 0 20px rgba(255, 0, 68, 0.4);
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 600px) {
+  .dashboard-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .car-card {
+    width: 90%;
+  }
+
+  button {
+    width: 100%;
+  }
+}
