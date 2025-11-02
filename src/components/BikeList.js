@@ -1,6 +1,6 @@
 import React from "react";
 
-function BikeList({ bikes = [], onEdit }) {
+function BikeList({ bikes = [], onEdit, onDelete }) {
   if (!bikes.length) {
     return <p className="text-center text-gray-400">No bikes available.</p>;
   }
@@ -25,12 +25,18 @@ function BikeList({ bikes = [], onEdit }) {
               <td className="p-3">{bike.brand}</td>
               <td className="p-3">{bike.model}</td>
               <td className="p-3">₹{bike.price}</td>
-              <td className="p-3 text-center">
+              <td className="p-3 text-center space-x-3">
                 <button
                   onClick={() => onEdit(bike)}
                   className="px-4 py-1 bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold rounded-lg hover:scale-105 transition-all"
                 >
                   Edit
+                </button>
+                <button
+                  onClick={() => onDelete(bike.id)}
+                  className="px-4 py-1 bg-red-600 text-white font-bold rounded-lg hover:bg-red-500 hover:scale-105 transition-all"
+                >
+                  Delete
                 </button>
               </td>
             </tr>
