@@ -123,7 +123,7 @@ function VehicleDashboard() {
       </aside>
 
       {/* Mobile top bar */}
-      <div className="md:hidden fixed top-4 left-4 right-4 z-40 flex items-center justify-between">
+      <div className="md:hidden fixed top-4 left-4 right-4 z-40 flex flex-col gap-2">
         <div className="bg-[#0b0e10]/95 px-4 py-2 rounded-lg border border-cyan-900/20 flex items-center gap-3 w-full">
           <div className="text-cyan-300 font-bold">Sarthak Garage</div>
           <div className="ml-auto flex gap-2">
@@ -131,13 +131,37 @@ function VehicleDashboard() {
             <button onClick={() => { setSelectedItem(null); setView("add"); }} className="px-3 py-1 bg-amber-400 rounded text-sm">Add</button>
           </div>
         </div>
+        <div className="flex gap-2 w-full">
+          <button
+            onClick={() => { setViewType("car"); setView("home"); }}
+            className={`flex-1 px-4 py-2 rounded-lg font-medium transition ${
+              viewType === "car" 
+                ? "bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-400/30 text-cyan-300" 
+                : "bg-[#0b0e10]/95 text-gray-300"
+            }`}
+          >
+            🚗 Cars
+          </button>
+          <button
+            onClick={() => { setViewType("bike"); setView("home"); }}
+            className={`flex-1 px-4 py-2 rounded-lg font-medium transition ${
+              viewType === "bike" 
+                ? "bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-400/30 text-emerald-300" 
+                : "bg-[#0b0e10]/95 text-gray-300"
+            }`}
+          >
+            🏍️ Bikes
+          </button>
+        </div>
       </div>
 
       {/* MAIN */}
-      <main className="flex-1 px-6 md:px-10 py-10 pt-24 md:pt-8 overflow-y-auto">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className={`text-3xl font-bold tracking-wide ${titleColor}`}>{titleEmoji} {viewType === "car" ? "Car" : "Bike"} Management</h1>
-          <div className="text-sm text-gray-400">Status: <span className={status === "loading" ? "text-yellow-400" : status === "failed" ? "text-red-500" : "text-green-400"}>{status || "idle"}</span></div>
+      <main className="flex-1 px-6 md:px-10 py-10 pt-32 md:pt-8 overflow-y-auto">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 mb-6">
+          <h1 className={`text-2xl sm:text-3xl font-bold tracking-wide ${titleColor}`}>{titleEmoji} {viewType === "car" ? "Car" : "Bike"} Management</h1>
+          <div className="bg-[#0b0e10]/80 px-3 py-1 rounded-lg border border-gray-700/50 text-sm text-gray-400 self-start sm:self-auto">
+            Status: <span className={status === "loading" ? "text-yellow-400" : status === "failed" ? "text-red-500" : "text-green-400"}>{status || "idle"}</span>
+          </div>
         </div>
 
         <AnimatePresence mode="wait">
