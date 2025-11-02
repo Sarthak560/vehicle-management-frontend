@@ -1,65 +1,82 @@
-import React, { useState, useEffect } from "react";
+// src/components/BikeForm.jsx
+import React, { useEffect, useState } from "react";
 
-function BikeForm({ onSubmit, selectedBike }) {
-  const [bikeData, setBikeData] = useState({
-    brand: "",
-    model: "",
-    price: "",
-  });
+export default function BikeForm({ onSubmit, selectedBike }) {
+  const [bike, setBike] = useState({ brand: "", model: "", price: "" });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (selectedBike) {
-      setBikeData(selectedBike);
-    }
+    if (selectedBike) setBike({ ...selectedBike });
   }, [selectedBike]);
 
+  const validate = () => {
+    const e = {};
+    if (!bike.brand || bike.brand.trim().length < 2) e.brand = "Brand required";
+    if (!bike.model || bike.model.trim().length < 1) e.model = "Model required";
+    if (bike.price === "" || Number(bike.price) <= 0) e.price = "Enter valid price";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
   const handleChange = (e) => {
-    setBikeData({ ...bikeData, [e.target.name]: e.target.value });
+    setBike((s) => ({ ...s, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(bikeData);
-    setBikeData({ brand: "", model: "", price: "" });
+    if (!validate()) return;
+    onSubmit({
+      brand: bike.brand.trim(),
+      model: bike.model.trim(),
+      price: Number(bike.price),
+      id: bike.id,
+    });
+    setBike({ brand: "", model: "", price: "" });
+    setErrors({});
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
       <input
-        type="text"
         name="brand"
-        placeholder="Enter Bike Brand"
-        value={bikeData.brand}
+        placeholder="Brand"
+        value={bike.brand}
         onChange={handleChange}
-        className="px-4 py-2 rounded-xl bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        required
+        className={`p-3 rounded-lg bg-gray-800/60 placeholder-gray-400 text-white outline-none border ${
+          errors.brand ? "border-red-500" : "border-emerald-400/20"
+        }`}
       />
+      {errors.brand && <div className="text-red-400 text-sm">{errors.brand}</div>}
+
       <input
-        type="text"
         name="model"
-        placeholder="Enter Bike Model"
-        value={bikeData.model}
+        placeholder="Model"
+        value={bike.model}
         onChange={handleChange}
-        className="px-4 py-2 rounded-xl bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        required
+        className={`p-3 rounded-lg bg-gray-800/60 placeholder-gray-400 text-white outline-none border ${
+          errors.model ? "border-red-500" : "border-emerald-400/20"
+        }`}
       />
+      {errors.model && <div className="text-red-400 text-sm">{errors.model}</div>}
+
       <input
-        type="number"
         name="price"
-        placeholder="Enter Price"
-        value={bikeData.price}
+        placeholder="Price"
+        type="number"
+        value={bike.price}
         onChange={handleChange}
-        className="px-4 py-2 rounded-xl bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-        required
+        className={`p-3 rounded-lg bg-gray-800/60 placeholder-gray-400 text-white outline-none border ${
+          errors.price ? "border-red-500" : "border-emerald-400/20"
+        }`}
       />
+      {errors.price && <div className="text-red-400 text-sm">{errors.price}</div>}
+
       <button
         type="submit"
-        className="px-6 py-2 bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold rounded-xl shadow-[0_0_20px_#00eaff70] hover:scale-105 transition-all duration-300"
+        className="mt-2 py-3 rounded-lg bg-gradient-to-r from-emerald-400 to-teal-400 font-bold text-black hover:scale-105"
       >
-        {selectedBike ? "Update Bike" : "Add Bike"}
+        {selectedBike ? "Update" : "Add"}
       </button>
     </form>
   );
 }
-
-export default BikeForm;
