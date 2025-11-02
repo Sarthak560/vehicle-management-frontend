@@ -1,7 +1,10 @@
 import axios from "axios";
 
+
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "https://vehicle-management-backend-u647.onrender.com/api",
+
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+
 });
 
 export default axiosClient;
