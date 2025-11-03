@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCars, addCar, updateCar, deleteCar } from "../store/carSlice";
 import { fetchBikes, addBike, updateBike, deleteBike } from "../store/bikeSlice";
+import { logout } from "../store/userStore";
 import CarForm from "../components/CarForm";
 import garageImage from "../assets/ok.jpg";
 import CarList from "../components/CarList";
@@ -76,6 +77,10 @@ function VehicleDashboard() {
     setView("add");
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   const ListComponent = viewType === "car" ? CarList : BikeList;
   const FormComponent = viewType === "car" ? CarForm : BikeForm;
   const accent = viewType === "car" ? "from-cyan-500 to-blue-500" : "from-emerald-500 to-teal-400";
@@ -96,7 +101,7 @@ function VehicleDashboard() {
         <h2 className="text-2xl font-bold text-cyan-400 tracking-wide mb-8 text-center">
           Sarthak <span className="text-gray-500 text-sm">Garage</span>
         </h2>
-        <nav className="flex flex-col gap-3">
+        <nav className="flex flex-col gap-3 flex-grow">
           <button
             onClick={() => { setViewType("car"); setView("home"); }}
             className={`px-4 py-3 rounded-xl text-left font-semibold transition ${viewType === "car" ? "bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-400/30 text-cyan-300" : "hover:bg-gray-800/30 text-gray-300"}`}
@@ -117,9 +122,16 @@ function VehicleDashboard() {
           <button onClick={() => { setSelectedItem(null); setView("add"); }} className="px-4 py-3 rounded-xl font-semibold bg-gradient-to-r from-orange-400 to-amber-300 text-black mt-3">
             ➕ Add New
           </button>
+          
+          <button 
+            onClick={handleLogout}
+            className="mt-auto px-4 py-3 rounded-xl font-semibold bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 transition-colors"
+          >
+            🚪 Logout
+          </button>
         </nav>
 
-        <footer className="mt-auto text-xs text-gray-500 text-center">ⓒ 2025 NextFleet Systems</footer>
+        <footer className="mt-4 text-xs text-gray-500 text-center">ⓒ 2025 NextFleet Systems</footer>
       </aside>
 
       {/* Mobile top bar */}
@@ -129,6 +141,7 @@ function VehicleDashboard() {
           <div className="ml-auto flex gap-2">
             <button onClick={() => setView("list")} className="px-3 py-1 bg-gray-800 rounded text-sm">List</button>
             <button onClick={() => { setSelectedItem(null); setView("add"); }} className="px-3 py-1 bg-amber-400 rounded text-sm">Add</button>
+            <button onClick={handleLogout} className="px-3 py-1 bg-red-500 rounded text-sm text-white">Logout</button>
           </div>
         </div>
         <div className="flex gap-2 w-full">
